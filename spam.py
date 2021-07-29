@@ -111,12 +111,15 @@ async def on_ready():
                 except:
                     pass
 
-    @Client.command()
+# Fix later fuck it
+
+"""    @Client.command()
     async def spammembers(ctx):
         args = ctx.message.content.split()
         await ctx.message.delete()
         for guild in Client.guilds:
-            for member in guild.members:
+            for member in ctx.guild.fetch_members(limit=None):
+                print(member)
                 sendEmoji = ''
                 for x in range(int(50)):
                     sendEmoji += random.choice(emojis)
@@ -125,7 +128,7 @@ async def on_ready():
                     print(f'Sent message to {member} in {guild}')
                 except:
                     pass
-        
+        """
 
 checkConfig()
 Client.run(config['token'], bot=False, reconnect=True)
