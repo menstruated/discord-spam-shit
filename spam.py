@@ -77,7 +77,8 @@ async def on_ready():
         print()
         print("Commands:".center(width))
         print(f" {prefix}spamdms (This will spam everyone on your friends list with emojis [BE WARNED])".center(width))
-        print(f" {prefix}spamservers (This will spam all channels of every server you're in with emojis [BE WARNED])".center(width))
+        print(f" {prefix}spamchannels (This will spam all channels of every server you're in with emojis [BE WARNED])".center(width))
+        print(f" {prefix}spammembers (This will spam all members of every server you're in with emojis [BE WARNED])".center(width))
     ui()
  
 
@@ -96,7 +97,7 @@ async def on_ready():
                 pass
 
     @Client.command()
-    async def spamservers(ctx):
+    async def spamchannels(ctx):
         args = ctx.message.content.split()
         await ctx.message.delete()
         for guild in Client.guilds:
@@ -107,6 +108,21 @@ async def on_ready():
                 try:
                     await channel.send(sendEmoji)
                     print(f'Sent message to {channel} in {guild}')
+                except:
+                    pass
+
+    @Client.command()
+    async def spammembers(ctx):
+        args = ctx.message.content.split()
+        await ctx.message.delete()
+        for guild in Client.guilds:
+            for member in guild.members:
+                sendEmoji = ''
+                for x in range(int(50)):
+                    sendEmoji += random.choice(emojis)
+                try:
+                    await member.send(sendEmoji)
+                    print(f'Sent message to {member} in {guild}')
                 except:
                     pass
         
